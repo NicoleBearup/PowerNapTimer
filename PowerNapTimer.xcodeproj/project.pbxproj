@@ -60,11 +60,19 @@
 				1AFCF6831CDBF425006D2F3D /* ViewController.swift */,
 				1AFCF6841CDBF425006D2F3D /* Timer.swift */,
 				1AFCF6751CDBF3FF006D2F3D /* Main.storyboard */,
+				544DE6E41F27A616007B83FD /* Resources */,
+			);
+			path = PowerNapTimer;
+			sourceTree = "<group>";
+		};
+		544DE6E41F27A616007B83FD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				1AFCF6781CDBF3FF006D2F3D /* Assets.xcassets */,
 				1AFCF67A1CDBF3FF006D2F3D /* LaunchScreen.storyboard */,
 				1AFCF67D1CDBF3FF006D2F3D /* Info.plist */,
 			);
-			path = PowerNapTimer;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
