@@ -57,9 +57,9 @@
 			isa = PBXGroup;
 			children = (
 				1AFCF6711CDBF3FF006D2F3D /* AppDelegate.swift */,
+				1AFCF6751CDBF3FF006D2F3D /* Main.storyboard */,
 				1AFCF6831CDBF425006D2F3D /* ViewController.swift */,
 				1AFCF6841CDBF425006D2F3D /* Timer.swift */,
-				1AFCF6751CDBF3FF006D2F3D /* Main.storyboard */,
 				544DE6E41F27A616007B83FD /* Resources */,
 			);
 			path = PowerNapTimer;

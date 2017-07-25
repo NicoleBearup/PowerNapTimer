@@ -71,7 +71,9 @@ class MyTimer: NSObject {
     func stopTimer() {
         if isOn {
             timeRemaining = nil
-            /// Call custom delegate metho timerStopped()
+            /// Destroy timer
+            timer?.invalidate()
+            /// Call custom delegate method timerStopped()
             delegate?.timerStopped()
         }
     }

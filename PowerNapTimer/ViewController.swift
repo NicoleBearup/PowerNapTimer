@@ -10,13 +10,22 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // MARK: IBOutlets
+    
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     
+    // MARK: Properties
+    
     let myTimer = MyTimer()
+    
+    // MARK: Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        myTimer.delegate = self
+        
         setView()
     }
     
@@ -38,9 +47,56 @@ class ViewController: UIViewController {
         if myTimer.isOn {
             myTimer.stopTimer()
         } else {
-            myTimer.startTimer(20*60.0)
+            myTimer.startTimer(3)
         }
         setView()
     }
+    
+    // MARK: UIAlertController
+    
+    func setupAlertController() {
+        /// Initialize instance of UIAlertController
+        let alert = UIAlertController(title: "Wake up!", message: "Get up you lazy bum!", preferredStyle: .alert)
+        
+        /// Initialize UIAlertAction
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel) { (_) in
+            self.setView()
+        }
+        
+        
+        /// Add the action
+        alert.addAction(dismissAction)
+        
+        /// Present the alert
+        present(alert, animated: true, completion: nil)
+    }
 }
+
+// MARK: Timer delegate
+
+extension ViewController: TimerDelegate {
+    
+    func timerSecondTick() {
+        updateTimerLabel()
+    }
+    
+    func timerCompleted() {
+        setView()
+        // Present the notification and alert controller
+        setupAlertController()
+    }
+    
+    func timerStopped() {
+        setView()
+        // Cancel notification
+    }
+}
+
+
+
+
+
+
+
+
 
