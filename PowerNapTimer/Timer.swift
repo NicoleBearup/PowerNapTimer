@@ -3,6 +3,7 @@
 //  PowerNapTimer
 //
 //  Created by James Pacheco on 4/12/16.
+//  Modified by Nicole Bearup on 7/25/17.
 //  Copyright © 2016 James Pacheco. All rights reserved.
 //
 
@@ -15,6 +16,8 @@ protocol TimerDelegate: class {
 }
 
 class MyTimer: NSObject {
+    
+    // MARK: Properties
     
     var timeRemaining: TimeInterval?
     var timer: Timer?
@@ -29,13 +32,8 @@ class MyTimer: NSObject {
         }
     }
     
-    func timeAsString() -> String {
-        let timeRemaining = Int(self.timeRemaining ?? 20*60)
-        let minutesLeft = timeRemaining / 60
-        let secondsLeft = timeRemaining - (minutesLeft*60)
-        return String(format: "%02d : %02d", arguments: [minutesLeft, secondsLeft])
-    }
-
+    // MARK: fileprivate Method
+    
     fileprivate func secondTick() {
         guard let timeRemaining = timeRemaining else {return}
         if timeRemaining > 0 {
@@ -52,9 +50,24 @@ class MyTimer: NSObject {
         }
     }
     
+    // MARK: Methods
+    
+    func timeAsString() -> String {
+        let timeRemaining = Int(self.timeRemaining ?? 20*60)
+        let minutesLeft = timeRemaining / 60
+        let secondsLeft = timeRemaining - (minutesLeft*60)
+        return String(format: "%02d : %02d", arguments: [minutesLeft, secondsLeft])
+    }
+    
     func startTimer(_ time: TimeInterval) {
         if !isOn {
             timeRemaining = time
+            DispatchQueue.main.async {
+                self.secondTick()
+                self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { (_) in
+                    self.secondTick()
+                })
+            }
             
             /*  scheduledTimer = Timer class func
                 interval = number of seconds before the block is fired
